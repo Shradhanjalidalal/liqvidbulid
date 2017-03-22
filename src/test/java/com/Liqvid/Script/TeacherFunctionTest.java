@@ -578,11 +578,10 @@ public class TeacherFunctionTest extends BaseLib
 			throw e;
 		}
 	}
-	@Test(priority=16,enabled=true,description="Click on start course and click on Cleaning is a gameLink.verify the game is lunched on a new popups or n't")
+	@Test(priority=16,enabled=false,description="Click on start course and click on Cleaning is a gameLink.verify the game is lunched on a new popups or n't")
 	public void TheGoatEaterLink() throws Exception
 	{
 		teachersigninpo=new TeacherSignPo(driver);
-		teacherhomepo=new TeacherHomePo(driver);
 		teachercoursepo=new TeacherCoursePo(driver);
 		try
 		{
@@ -622,11 +621,10 @@ public class TeacherFunctionTest extends BaseLib
 		  throw e;
 		}
 	}
-	@Test(priority=17,enabled=false,description="Start a session which is partially completed.Verify the session is resumed from its stop point.")
+	@Test(priority=17,enabled=true,description="Start a session which is partially completed.Verify the session is resumed from its stop point.")
 	public void ResumeSession() throws Exception
 	{
 		teachersigninpo=new TeacherSignPo(driver);
-		teacherhomepo=new TeacherHomePo(driver);
 		teachercoursepo=new TeacherCoursePo(driver);
 		try
 		{

@@ -6,15 +6,4 @@
       <class name="com.Liqvid.Script.TeacherPageLevel"/>
     </classes>
   </test> <!-- Test -->
-  <test name="Test(failed)">
-    <classes>
-      <class name="com.Liqvid.Script.TeacherPageLevel">
-        <methods>
-          <include name="studentProfilePage"/>
-          <include name="setUp"/>
-          <include name="tearDown"/>
-        </methods>
-      </class> <!-- com.Liqvid.Script.TeacherPageLevel -->
-    </classes>
-  </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

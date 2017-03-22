@@ -132,6 +132,14 @@ public class TeacherCoursePo {
    {
 	   return eleStartCourseButton;
    }
+ //To verify all session in course page
+   @FindBy(xpath="//div[@class='divMiddle']")
+   private WebElement eleSession;
+   public WebElement getEleSession()
+   {
+	   return eleSession;
+   }
+   
 //To verify Preassessment link in the course page
    @FindBy(xpath="//a[contains(text(),'Pre Assessment')]")
    private WebElement elePreAssessmentLink;
@@ -328,12 +336,12 @@ public class TeacherCoursePo {
    public WebElement getEleResultMessageText(){
 	   return eleResultMessageText;
    }
-   //to verify the back button is dispalyed
-   @FindBy(xpath="//img[@id='imgBackMO']")
+  /* //to verify the back button is dispalyed
+   @FindBy(id="btnBackDiv")
    private WebElement eleBackBtn;
    public WebElement getEleBackBtn(){
 	   return eleBackBtn;
-   }
+   }*/
    @FindBy(xpath="//a[contains(text(),'The Goat Eater')]")
    private WebElement eleTheGoatEaterLink;
    public WebElement getEleTheGoatEaterLink()
@@ -406,7 +414,7 @@ public class TeacherCoursePo {
 	   return eleRefreshIcon;
    }
    //next icon
-   @FindBy(xpath="//div[@id='btnRefDiv']/../div[10]/a/img[@id='imgNext']")
+   @FindBy(xpath="//div[@id='btnNextDiv']//img[@id='imgNext']")
    private WebElement eleNextIcon;
    public WebElement getEleNextIcon()
    {
@@ -420,7 +428,7 @@ public class TeacherCoursePo {
 	   return elePageValue;
    }
    //back button
-   @FindBy(xpath="//div[@id='btnBackDiv']/../div[5]/a/img[@id='imgBack']")
+   @FindBy(xpath="//div[@id='btnBackDiv']//img[@id='imgBack']")
    private WebElement eleBackButton;
    public WebElement getEleBackButton()
    {
@@ -442,6 +450,7 @@ public void NextAndPrevButton() throws InterruptedException
     	  if(i==count)
 		     {
     		    driver.switchTo().parentFrame();
+    		    System.out.println("Switched to parent frame");
 	     		driver.switchTo().frame(driver.findElement(By.id("content")));
 				Thread.sleep(6000);
 	    		System.out.println(getEleWelcomeText().getText());
@@ -473,9 +482,10 @@ public void NextAndPrevButton() throws InterruptedException
         Thread.sleep(10000);
         getEleNextIcon().click();
         Thread.sleep(10000);
-        getEleBackBtn().click();
-        getEleNextIcon().click();
-        driver.switchTo().parentFrame();
+        getEleBackButton().click();
+        Thread.sleep(3000);
+       getEleNextIcon().click();
+       // driver.switchTo().parentFrame();
         Thread.sleep(7000);
         
       }
@@ -511,8 +521,10 @@ public void verifyIncompleteSession() throws Exception
 	                driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
 	                }
 	              System.out.println(driver.getCurrentUrl());
-	              System.out.println("Game got started from starting");
-	              break;
+	              driver.switchTo().defaultContent();
+	              driver.switchTo().frame(driver.findElement(By.id("frabotbar")));
+	              teachersigninpo.elementStatus(teachercoursepo.getElePageValue(),"starting page is","dispalyed");
+	               break;
 		     }
     	driver.switchTo().parentFrame();
     	driver.switchTo().frame(driver.findElement(By.id("fraheader")));

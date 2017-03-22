@@ -6,15 +6,4 @@
       <class name="com.Liqvid.Script.TeacherFunctionTest"/>
     </classes>
   </test> <!-- Default test -->
-  <test name="Default test(failed)">
-    <classes>
-      <class name="com.Liqvid.Script.TeacherFunctionTest">
-        <methods>
-          <include name="TheGoatEaterLink"/>
-          <include name="setUp"/>
-          <include name="tearDown"/>
-        </methods>
-      </class> <!-- com.Liqvid.Script.TeacherFunctionTest -->
-    </classes>
-  </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

@@ -146,7 +146,7 @@ public class TeacherHomePo {
 	public WebElement getEleProfileImgInDropdown(){
 		return eleProfileImgInDropdown;
 	}
-	// To identify "student Name" in the Dropdown
+	// To identify "teacher Name" in the Dropdown
 	@FindBy(xpath="(//a[@class='dropdown-toggle']//span)[2]")
 	private WebElement eleProfileTextDropdown;
 	public WebElement getEleProfileTextDropdown(){

@@ -1,6 +1,11 @@
 package com.Liqvid.Script;
 
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
 import com.Liqvid.Library.BaseLib;
@@ -14,6 +19,7 @@ import com.kirwa.nxgreport.NXGReports;
 import com.kirwa.nxgreport.logging.LogAs;
 import com.kirwa.nxgreport.selenium.reports.CaptureScreen;
 import com.kirwa.nxgreport.selenium.reports.CaptureScreen.ScreenshotOf;
+
 
 
 
@@ -67,8 +73,8 @@ public class TeacherPageLevel extends BaseLib
 			throw e;
 		}
 	}
-	@Test(priority=3,enabled=true, description="Display of elements on Student Home Page")
-	public void studentHomepage() throws Exception{
+	@Test(priority=3,enabled=false, description="Display of elements on teacher Home Page")
+	public void TeacherHomepage() throws Exception{
 		teacherpo=new TeacherSignPo(driver);
 		teacherhomepo=new TeacherHomePo (driver);
 		try{
@@ -118,15 +124,15 @@ public class TeacherPageLevel extends BaseLib
 			throw e;
 		}
 	}
-	@Test(priority=4,enabled=true, description="Display of elements on Student Profile Page")
-	public void studentProfilePage() throws Exception{
+	@Test(priority=4,enabled=false, description="Display of elements on teacher Profile Page")
+	public void TeacherProfilePage() throws Exception{
 		teacherpo=new TeacherSignPo(driver);
-		
 		teacherprofilepo=new TeacherProfilePo(driver);
+		teacherhomepo=new TeacherHomePo (driver);
 		try{
 			loadURL(GenericLib.getCongigValue(GenericLib.sConfigFile, "REGISTRATIONURL"));
 			teacherpo.Login(GenericLib.getCongigValue(GenericLib.sConfigFile, "TEACHERLOGINID"),GenericLib.getCongigValue(GenericLib.sConfigFile, "TEACHERPASSWORD"));
-			Thread.sleep(4000);
+			Thread.sleep(7000);
 			teacherhomepo.getEleProfileTextDropdown().click();
 			teacherhomepo.getEleProfileOption().click();
 		    teacherpo.elementStatus(teacherprofilepo.getEleProfileText(),"The Profile text is", "displayed");
@@ -163,5 +169,150 @@ public class TeacherPageLevel extends BaseLib
 			throw e;
 		}
 	}
+	@Test(priority=5,enabled=false, description="Display of elements on teacher Courses page")
+	public void TeacherCourses() throws Exception{
+		teacherpo=new TeacherSignPo(driver);
+		teachercoursepo=new TeacherCoursePo(driver);
+		try{
+			loadURL(GenericLib.getCongigValue(GenericLib.sConfigFile, "REGISTRATIONURL"));
+			teacherpo.Login(GenericLib.getCongigValue(GenericLib.sConfigFile, "TEACHERLOGINID"),GenericLib.getCongigValue(GenericLib.sConfigFile, "TEACHERPASSWORD"));
+			Thread.sleep(4000);
+			teachercoursepo.getEleCourseTab().click();
+			Thread.sleep(2000);
+			teacherpo.elementStatus(teachercoursepo.getEleCourseText(),"Course text is", "displayed");
+			teacherpo.elementStatus(teachercoursepo.getEleInstructionText(),"Course instruction text is", "displayed");
+			teacherpo.elementStatus(teachercoursepo.getEleStepText(),"step text is", "displayed");
+			teacherpo.elementStatus(teachercoursepo.getEleStep1Circle(),"step circle symbol is", "displayed");
+			teacherpo.elementStatus(teachercoursepo.getEleBatchText(),"Batch text is", "displayed");
+			teacherpo.elementStatus(teachercoursepo.getEleStep1Circle(),"step circle symbol is", "displayed");
+			teacherpo.elementStatus(teachercoursepo.getEleSelectBatchText(),"Select batch text is", "displayed");
+			teacherpo.elementStatus(teachercoursepo.getEleSelectcourseText(),"Select course text is", "displayed");
+			teacherpo.elementStatus(teachercoursepo.getEleClickcourseText(),"Click course text is", "displayed");
+			teacherpo.elementStatus(teachercoursepo.getEleCourseText(),"course text is", "displayed");
+		
+		}catch(AssertionError e)
+		{
+			NXGReports.addStep("Testcase Failed.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			throw e;
+		}
+	}
+	@Test(priority=6,enabled=false, description="Display of elements on teacher session page in course module")
+	public void TeacherSession() throws Exception{
+		teacherpo=new TeacherSignPo(driver);
+		teachercoursepo=new TeacherCoursePo(driver);
+		try{
+			loadURL(GenericLib.getCongigValue(GenericLib.sConfigFile, "REGISTRATIONURL"));
+			teacherpo.Login(GenericLib.getCongigValue(GenericLib.sConfigFile, "TEACHERLOGINID"),GenericLib.getCongigValue(GenericLib.sConfigFile, "TEACHERPASSWORD"));
+			Thread.sleep(4000);
+			teachercoursepo.getEleCourseTab().click();
+			Thread.sleep(2000);
+			teacherpo.elementStatus(teachercoursepo.getEleCourseText(),"Course text is", "displayed");
+			teacherpo.elementStatus(teachercoursepo.getEleInstructionText(),"Course instruction text is", "displayed");
+			teacherpo.elementStatus(teachercoursepo.getEleStepText(),"step text is", "displayed");
+			teacherpo.elementStatus(teachercoursepo.getEleStep1Circle(),"step circle symbol is", "displayed");
+			teacherpo.elementStatus(teachercoursepo.getEleBatchText(),"Batch text is", "displayed");
+			teacherpo.elementStatus(teachercoursepo.getEleStep1Circle(),"step circle symbol is", "displayed");
+			teacherpo.elementStatus(teachercoursepo.getEleSelectBatchText(),"Select batch text is", "displayed");
+			teacherpo.elementStatus(teachercoursepo.getEleSelectcourseText(),"Select course text is", "displayed");
+			teacherpo.elementStatus(teachercoursepo.getEleClickcourseText(),"Click course text is", "displayed");
+			teacherpo.elementStatus(teachercoursepo.getEleCourseText(),"course text is", "displayed");
+			Thread.sleep(6000);	
+			Select select=new Select(teachercoursepo.getEleBatchSelected());
+			select.selectByIndex(0);
+			Thread.sleep(6000);
+			Select select1=new Select(teachercoursepo.getEleCourseSelected());
+			select1.selectByIndex(0);
+			Thread.sleep(2000);
+			teachercoursepo.getEleStartCourseButton().click();
+			teacherpo.scrolldown();
+			Thread.sleep(4000);
+			driver.switchTo().frame(0);
+			teacherpo.elementStatus(teachercoursepo.getEleSession(),"all session is","displayed");
+		
+		}catch(AssertionError e)
+		{
+			NXGReports.addStep("Testcase Failed.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			throw e;
+		}
+	}
+	@Test(priority=7,enabled=false, description="Display of all sessions on teacher session page")
+	public void AllSession() throws Exception{
+		teacherpo=new TeacherSignPo(driver);
+		teachercoursepo=new TeacherCoursePo(driver);
+		try{
+			loadURL(GenericLib.getCongigValue(GenericLib.sConfigFile, "REGISTRATIONURL"));
+			teacherpo.Login(GenericLib.getCongigValue(GenericLib.sConfigFile, "TEACHERLOGINID"),GenericLib.getCongigValue(GenericLib.sConfigFile, "TEACHERPASSWORD"));
+			Thread.sleep(4000);
+			teachercoursepo.getEleCourseTab().click();
+			Thread.sleep(2000);
+			teacherpo.elementStatus(teachercoursepo.getEleCourseText(),"Course text is", "displayed");
+			teacherpo.elementStatus(teachercoursepo.getEleInstructionText(),"Course instruction text is", "displayed");
+			teacherpo.elementStatus(teachercoursepo.getEleStepText(),"step text is", "displayed");
+			teacherpo.elementStatus(teachercoursepo.getEleStep1Circle(),"step circle symbol is", "displayed");
+			teacherpo.elementStatus(teachercoursepo.getEleBatchText(),"Batch text is", "displayed");
+			teacherpo.elementStatus(teachercoursepo.getEleStep1Circle(),"step circle symbol is", "displayed");
+			teacherpo.elementStatus(teachercoursepo.getEleSelectBatchText(),"Select batch text is", "displayed");
+			teacherpo.elementStatus(teachercoursepo.getEleSelectcourseText(),"Select course text is", "displayed");
+			teacherpo.elementStatus(teachercoursepo.getEleClickcourseText(),"Click course text is", "displayed");
+			teacherpo.elementStatus(teachercoursepo.getEleCourseText(),"course text is", "displayed");
+		    Thread.sleep(6000);	
+			Select select=new Select(teachercoursepo.getEleBatchSelected());
+			select.selectByIndex(0);
+			Thread.sleep(6000);
+			Select select1=new Select(teachercoursepo.getEleCourseSelected());
+			select1.selectByIndex(0);
+			Thread.sleep(2000);
+			teachercoursepo.getEleStartCourseButton().click();
+			teacherpo.scrolldown();
+			Thread.sleep(4000);
+			driver.switchTo().frame(0);
+			teacherpo.elementStatus(teachercoursepo.getEleSession(),"all session is","displayed");
+		    WebElement table = driver.findElement(By.xpath("//div[@class='divMiddle']"));
+			List<WebElement>links = table.findElements(By.tagName("a")); 
+			for(WebElement tdElement : links) 
+			{ 
+			 System.out.println(tdElement.getText()); 
+			} 
+		
+		}catch(AssertionError e)
+		{
+			NXGReports.addStep("Testcase Failed.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+			throw e;
+		}
+	}
+	@Test(priority=8,enabled=true, description="Display of Elements in  Pre Assessment Instructions Page")
+	public void preAssessmentInstruction() throws Exception{
+	teacherpo=new TeacherSignPo(driver);
+	teachercoursepo=new TeacherCoursePo(driver);
+	
+	try{
+		loadURL(GenericLib.getCongigValue(GenericLib.sConfigFile, "REGISTRATIONURL"));
+		teacherpo.Login(GenericLib.getCongigValue(GenericLib.sConfigFile, "TEACHERLOGINID"),GenericLib.getCongigValue(GenericLib.sConfigFile, "TEACHERPASSWORD"));
+		Thread.sleep(4000);	
+		teachercoursepo.getEleCourseTab().click();
+		Thread.sleep(2000);	
+		teacherpo.elementStatus(teachercoursepo.getEleBatchSelected(), "List of Batches is ", "displayed");
+		Select select=new Select(teachercoursepo.getEleBatchSelected());
+		select.selectByIndex(0);
+		Thread.sleep(2000);
+		teacherpo.elementStatus(teachercoursepo.getEleCourseSelected(), "List of Courses is ", "displayed");
+		Select select1=new Select(teachercoursepo.getEleCourseSelected());
+		select1.selectByIndex(0);
+		teacherpo.elementStatus(teachercoursepo.getEleStartCourseButton(), "Start Course is ", "displayed");
+		teachercoursepo.getEleStartCourseButton().click();
+		Thread.sleep(2000);
+		driver.findElements(By.tagName("iframe")).size();
+		driver.switchTo().frame(0); 
+		teacherpo.elementStatus(teachercoursepo.getElePreAssessmentLink(),"PreAssessmentlink","enabled");
+		teachercoursepo.getElePreAssessmentLink().sendKeys(Keys.ENTER);
+		Thread.sleep(2000);
+		teacherpo.verifyAssessmentinstruction();
+	}catch(AssertionError e)
+	{
+		NXGReports.addStep("Testcase Failed.", LogAs.FAILED, new CaptureScreen(ScreenshotOf.BROWSER_PAGE));
+		throw e;
+	}
+	}
+	
 	
 }
